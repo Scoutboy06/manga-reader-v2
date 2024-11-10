@@ -8,6 +8,9 @@ import sharp from 'sharp'
 
 import { Users } from './collections/Users'
 import { Media } from './collections/Media'
+import { Author } from './collections/Author'
+import { Genre } from './collections/Genre'
+import { Manga } from './collections/Manga'
 
 const filename = fileURLToPath(import.meta.url)
 const dirname = path.dirname(filename)
@@ -18,8 +21,12 @@ export default buildConfig({
     importMap: {
       baseDir: path.resolve(dirname),
     },
+    livePreview: {
+      url: 'http://localhost:3000',
+      collections: ['manga', 'authors'],
+    },
   },
-  collections: [Users, Media],
+  collections: [Manga, Author, Genre, Users, Media],
   editor: lexicalEditor(),
   secret: process.env.PAYLOAD_SECRET || '',
   typescript: {
